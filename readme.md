@@ -175,3 +175,32 @@ svg.select("circle")
 </code></pre>
 style 도 atrr 과 마찬가지로 묶어서 지정할 수 있다.
 
+### 라벨의 사용
+아래는 라벨을 위에서 만든 막대 그래프의 상위 중간에 넣는 코드이다.
+<pre><code>
+svg.selectAll("text")
+    .data(dataset)
+    .enter()
+    .append("text")
+    .text(function(d) {
+        return d;
+    })
+    .attr("x", function(d, i) {
+        return i * (w / dataset.length) + (w / dataset.length - barPadding) / 2;
+    })
+    .attr("y", function(d) {
+        return h - (d * 4) + 14;
+    })
+    .attr("font-family", "sans-serif")
+    .attr("font-size", "11px")
+    .attr("fill", "white")
+    .attr("text-anchor", "middle")
+</code></pre>
+
+이 때 라벨을 바의 중간에 위치시키기 위해 아래와 같이 지정한다.
+<pre><code>
+    .attr("x", function(d, i) {
+            return i * (w / dataset.length) + (w / dataset.length - barPadding) / 2;
+    })
+    .attr("text-anchor", "middle")
+</code></pre>

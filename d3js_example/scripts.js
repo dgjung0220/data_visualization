@@ -1,6 +1,6 @@
 var dataset = new Array;
 for (var i = 0; i < 25; i++) {
-    var newNum = Math.random() * 30; // 0 ~ 30  사이의 난수
+    var newNum = Math.round(Math.random() * 30); // 0 ~ 30  사이의 난수
     dataset.push(newNum);
 
 }
@@ -37,7 +37,7 @@ circles.attr("cx", function(d, i) {
 
 // svg 의 폭, 넓이 지정.
 var w = 500;
-var h = 100;
+var h = 120;
 var barPadding = 1;
 
 var svg = d3.select("body").append("svg")
@@ -61,3 +61,21 @@ svg.selectAll("rect")
         .attr("fill", function(d) {
             return "rgb(0, 0, " + Math.round(d * 10) + ")";
         });
+
+svg.selectAll("text")
+    .data(dataset)
+    .enter()
+    .append("text")
+    .text(function(d) {
+        return d;
+    })
+    .attr("x", function(d, i) {
+        return i * (w / dataset.length) + (w / dataset.length - barPadding) / 2;
+    })
+    .attr("y", function(d) {
+        return h - (d * 4) + 14;
+    })
+    .attr("font-family", "sans-serif")
+    .attr("font-size", "11px")
+    .attr("fill", "white")
+    .attr("text-anchor", "middle")
